@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visited Places — Travel Planner</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span>✈️</span> Travel Planner
+    </a>
+    <div class="navbar-actions">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="visited.html" class="nav-link active">Visited</a>
+      <a href="add.html" class="btn btn-primary btn-sm">+ Add</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-container">
+
+    <div class="visited-header">
+      <div class="page-header" style="margin-bottom: 0;">
+        <h1 class="page-title">Places I've Been</h1>
+        <p class="page-subtitle">Your travel history</p>
+      </div>
+      <span class="visited-count" id="visited-count">0 destinations visited</span>
+    </div>
+
+    <!-- Visited List -->
+    <div class="destinations-list" id="visited-list"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-emoji">🧳</div>
+      <h3>No visited places yet</h3>
+      <p>When you visit a destination, mark it as visited and it will appear here.</p>
+      <a href="index.html" class="btn btn-primary">View my destinations</a>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storageModule.js"></script>
+  <script src="js/displayModule.js"></script>
+  <script src="js/visitedModule.js"></script>
+  <script>
+    VisitedModule.init();
+  </script>
+
+</body>
+</html>

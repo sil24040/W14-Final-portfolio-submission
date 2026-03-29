@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Travel Planner</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span>✈️</span> Travel Planner
+    </a>
+    <div class="navbar-actions">
+      <a href="index.html" class="nav-link active">Home</a>
+      <a href="visited.html" class="nav-link">Visited</a>
+      <a href="add.html" class="btn btn-primary btn-sm">+ Add</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="page-container">
+
+    <div class="page-header">
+      <h1 class="page-title">My Destinations</h1>
+      <p class="page-subtitle">Plan your next adventure</p>
+    </div>
+
+    <!-- Search -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search-input" placeholder="Search by city or country..." />
+    </div>
+
+    <!-- Filter Tabs -->
+    <div class="tab-bar">
+      <button class="tab-btn active" data-filter="all">All</button>
+      <button class="tab-btn" data-filter="planned">Planned</button>
+      <button class="tab-btn" data-filter="visited">Visited</button>
+    </div>
+
+    <!-- Destinations List -->
+    <div class="destinations-list" id="destinations-list"></div>
+
+    <!-- Empty State -->
+    <div class="empty-state" id="empty-state" style="display: none;">
+      <div class="empty-emoji">🗺️</div>
+      <h3>No destinations yet</h3>
+      <p>Start building your travel wishlist by adding your first destination.</p>
+      <a href="add.html" class="btn btn-primary">+ Add Destination</a>
+    </div>
+
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/storageModule.js"></script>
+  <script src="js/displayModule.js"></script>
+  <script>
+    DisplayModule.init();
+  </script>
+
+</body>
+</html>

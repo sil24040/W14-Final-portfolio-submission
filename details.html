@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destination Details — Travel Planner</title>
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+ 
+  <!-- Navigation -->
+  <nav class="navbar">
+    <a href="index.html" class="navbar-brand">
+      <span>✈️</span> Travel Planner
+    </a>
+    <div class="navbar-actions">
+      <a href="index.html" class="nav-link">Home</a>
+      <a href="visited.html" class="nav-link">Visited</a>
+      <a href="add.html" class="btn btn-primary btn-sm">+ Add</a>
+    </div>
+  </nav>
+ 
+  <!-- Main Content -->
+  <div class="page-container">
+ 
+    <a href="index.html" class="back-link" id="back-btn">← Back to destinations</a>
+ 
+    <!-- Hero -->
+    <div class="detail-hero">
+      <div class="detail-hero-emoji" id="dest-emoji">✈️</div>
+      <div class="detail-hero-info">
+        <div class="detail-city" id="dest-city">Loading...</div>
+        <div class="detail-country" id="dest-country"></div>
+      </div>
+      <span class="badge" id="dest-status"></span>
+    </div>
+ 
+    <!-- Weather -->
+    <div class="weather-box" id="weather-box">
+      <div class="weather-loading">Loading weather...</div>
+    </div>
+ 
+    <!-- Planned Date -->
+    <div class="detail-section">
+      <div class="detail-section-label">Planned visit date</div>
+      <div class="detail-section-value" id="dest-date">—</div>
+    </div>
+ 
+    <!-- Notes -->
+    <div class="detail-section">
+      <div class="detail-section-label">Travel notes</div>
+      <div class="detail-section-value" id="dest-notes">—</div>
+    </div>
+ 
+    <!-- Actions -->
+    <div class="detail-actions">
+      <button class="btn btn-primary" id="toggle-visited-btn">Mark as Visited ✓</button>
+      <button class="btn btn-danger" id="delete-btn">Remove</button>
+    </div>
+ 
+  </div>
+ 
+  <!-- Scripts -->
+  <script src="js/storageModule.js"></script>
+  <script src="js/displayModule.js"></script>
+  <script src="js/weatherModule.js"></script>
+  <script src="js/detailsModule.js"></script>
+  <script>
+    DetailsModule.init();
+  </script>
+ 
+</body>
+</html>
+ 
