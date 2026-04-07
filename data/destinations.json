@@ -1,47 +1,47 @@
 [
-    {
-      "id": "1",
-      "city": "Paris",
-      "country": "France",
-      "description": "The city of lights, famous for the Eiffel Tower, world-class cuisine, and stunning art museums.",
-      "plannedDate": "2025-06",
-      "notes": "Visit the Louvre, try croissants at a local boulangerie, walk along the Seine at sunset.",
-      "visited": false
-    },
-    {
-      "id": "2",
-      "city": "Kyoto",
-      "country": "Japan",
-      "description": "Ancient capital of Japan with thousands of classical Buddhist temples, gardens, and geisha districts.",
-      "plannedDate": "2025-09",
-      "notes": "See the bamboo groves in Arashiyama, visit Fushimi Inari shrine at dawn, try matcha everything.",
-      "visited": false
-    },
-    {
-      "id": "3",
-      "city": "Rome",
-      "country": "Italy",
-      "description": "The Eternal City, home to the Colosseum, Vatican City, and some of the world's best pasta.",
-      "plannedDate": "2024-03",
-      "notes": "Tossed a coin in the Trevi Fountain! The carbonara at the small trattoria near the Pantheon was unforgettable.",
-      "visited": true
-    },
-    {
-      "id": "4",
-      "city": "Cape Town",
-      "country": "South Africa",
-      "description": "Stunning coastal city beneath Table Mountain with incredible beaches, wine regions, and diverse culture.",
-      "plannedDate": "2026-01",
-      "notes": "Hike Table Mountain, visit Boulders Beach for the penguins, explore the Cape Winelands.",
-      "visited": false
-    },
-    {
-      "id": "5",
-      "city": "New York",
-      "country": "USA",
-      "description": "The city that never sleeps — iconic skyline, world-famous museums, Broadway shows, and endless food.",
-      "plannedDate": "2023-08",
-      "notes": "Central Park in fall was magical. Must do: the High Line, MOMA, and a real NY slice.",
-      "visited": true
-    }
-  ]
+  {
+    "id": "1",
+    "city": "Paris",
+    "country": "France",
+    "description": "The city of lights, famous for the Eiffel Tower, world-class cuisine, and stunning art museums.",
+    "plannedDate": "2025-06",
+    "notes": "Visit the Louvre, try croissants at a local boulangerie, walk along the Seine at sunset.",
+    "visited": false
+  },
+  {
+    "id": "2",
+    "city": "Kyoto",
+    "country": "Japan",
+    "description": "Ancient capital of Japan with thousands of classical Buddhist temples, gardens, and geisha districts.",
+    "plannedDate": "2025-09",
+    "notes": "See the bamboo groves in Arashiyama, visit Fushimi Inari shrine at dawn, try matcha everything.",
+    "visited": false
+  },
+  {
+    "id": "3",
+    "city": "Rome",
+    "country": "Italy",
+    "description": "The Eternal City, home to the Colosseum, Vatican City, and some of the world's best pasta.",
+    "plannedDate": "2024-03",
+    "notes": "Tossed a coin in the Trevi Fountain! The carbonara at the small trattoria near the Pantheon was unforgettable.",
+    "visited": true
+  },
+  {
+    "id": "4",
+    "city": "Cape Town",
+    "country": "South Africa",
+    "description": "Stunning coastal city beneath Table Mountain with incredible beaches, wine regions, and diverse culture.",
+    "plannedDate": "2026-01",
+    "notes": "Hike Table Mountain, visit Boulders Beach for the penguins, explore the Cape Winelands.",
+    "visited": false
+  },
+  {
+    "id": "5",
+    "city": "New York",
+    "country": "USA",
+    "description": "The city that never sleeps — iconic skyline, world-famous museums, Broadway shows, and endless food.",
+    "plannedDate": "2023-08",
+    "notes": "Central Park in fall was magical. Must do: the High Line, MOMA, and a real NY slice.",
+    "visited": true
+  }
+]

@@ -7,7 +7,7 @@
   <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
- 
+
   <!-- Navigation -->
   <nav class="navbar">
     <a href="index.html" class="navbar-brand">
@@ -19,13 +19,14 @@
       <a href="add.html" class="btn btn-primary btn-sm">+ Add</a>
     </div>
   </nav>
- 
+
   <!-- Main Content -->
   <div class="page-container">
- 
+
+    <!-- Back link — id used by detailsModule.js -->
     <a href="index.html" class="back-link" id="back-btn">← Back to destinations</a>
- 
-    <!-- Hero -->
+
+    <!-- Hero section — populated by detailsModule.js -->
     <div class="detail-hero">
       <div class="detail-hero-emoji" id="dest-emoji">✈️</div>
       <div class="detail-hero-info">
@@ -34,33 +35,33 @@
       </div>
       <span class="badge" id="dest-status"></span>
     </div>
- 
-    <!-- Weather -->
+
+    <!-- Weather box — populated by weatherModule.js -->
     <div class="weather-box" id="weather-box">
       <div class="weather-loading">Loading weather...</div>
     </div>
- 
+
     <!-- Planned Date -->
     <div class="detail-section">
       <div class="detail-section-label">Planned visit date</div>
       <div class="detail-section-value" id="dest-date">—</div>
     </div>
- 
-    <!-- Notes -->
+
+    <!-- Travel Notes -->
     <div class="detail-section">
       <div class="detail-section-label">Travel notes</div>
       <div class="detail-section-value" id="dest-notes">—</div>
     </div>
- 
-    <!-- Actions -->
+
+    <!-- Action Buttons -->
     <div class="detail-actions">
       <button class="btn btn-primary" id="toggle-visited-btn">Mark as Visited ✓</button>
       <button class="btn btn-danger" id="delete-btn">Remove</button>
     </div>
- 
+
   </div>
- 
-  <!-- Scripts -->
+
+  <!-- Scripts loaded in dependency order -->
   <script src="js/storageModule.js"></script>
   <script src="js/displayModule.js"></script>
   <script src="js/weatherModule.js"></script>
@@ -68,7 +69,6 @@
   <script>
     DetailsModule.init();
   </script>
- 
+
 </body>
 </html>
- 

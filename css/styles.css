@@ -1,7 +1,5 @@
-/* styles.css — Travel Planner */
-
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=DM+Sans:wght@400;500&display=swap');
-
+ 
 /* ===== CSS Variables ===== */
 :root {
   --green-dark: #1b4332;
@@ -20,11 +18,15 @@
   --shadow: 0 2px 12px rgba(0,0,0,0.08);
   --radius: 12px;
   --radius-sm: 8px;
+ 
+  /* Animation durations as variables for consistency */
+  --transition-fast: 0.2s ease;
+  --transition-med: 0.3s ease;
 }
-
+ 
 /* ===== Reset & Base ===== */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
+ 
 body {
   font-family: 'DM Sans', sans-serif;
   background-color: var(--sand);
@@ -32,8 +34,17 @@ body {
   min-height: 100vh;
   font-size: 15px;
   line-height: 1.6;
+ 
+  /* CSS Animation: fade in the whole page on load */
+  animation: pageFadeIn 0.4s ease forwards;
 }
-
+ 
+/* Page load animation */
+@keyframes pageFadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
 /* ===== Navigation ===== */
 .navbar {
   background: var(--green-dark);
@@ -46,7 +57,7 @@ body {
   top: 0;
   z-index: 100;
 }
-
+ 
 .navbar-brand {
   font-family: 'Playfair Display', serif;
   color: var(--white);
@@ -55,24 +66,27 @@ body {
   display: flex;
   align-items: center;
   gap: 8px;
+  /* CSS Transition: smooth hover effect */
+  transition: opacity var(--transition-fast);
 }
-
+ 
+.navbar-brand:hover { opacity: 0.85; }
 .navbar-brand span { font-size: 20px; }
-
 .navbar-actions { display: flex; align-items: center; gap: 10px; }
-
+ 
 .nav-link {
   color: #a8d5b5;
   text-decoration: none;
   font-size: 14px;
   padding: 6px 12px;
   border-radius: var(--radius-sm);
-  transition: all 0.2s;
+  /* CSS Transition on multiple properties */
+  transition: color var(--transition-fast), background var(--transition-fast);
 }
-
+ 
 .nav-link:hover { color: var(--white); background: rgba(255,255,255,0.1); }
 .nav-link.active { color: var(--white); }
-
+ 
 /* ===== Buttons ===== */
 .btn {
   display: inline-flex;
@@ -85,61 +99,56 @@ body {
   font-weight: 500;
   cursor: pointer;
   border: none;
-  transition: all 0.2s;
+  transition: background var(--transition-fast), transform var(--transition-fast);
   text-decoration: none;
 }
-
-.btn-primary {
-  background: var(--orange);
-  color: var(--white);
+ 
+.btn-primary { background: var(--orange); color: var(--white); }
+.btn-primary:hover {
+  background: var(--orange-dark);
+  /* CSS Animation: subtle lift on hover */
+  transform: translateY(-1px);
 }
-.btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
-
+ 
 .btn-secondary {
   background: var(--sand-dark);
   color: var(--text-primary);
   border: 1px solid var(--border);
 }
 .btn-secondary:hover { background: var(--border); }
-
+ 
 .btn-danger {
   background: #fee2e2;
   color: #dc2626;
   border: 1px solid #fca5a5;
 }
 .btn-danger:hover { background: #fca5a5; }
-
 .btn-sm { padding: 6px 12px; font-size: 13px; }
-
+ 
 /* ===== Page Layout ===== */
 .page-container {
   max-width: 680px;
   margin: 0 auto;
   padding: 24px 16px;
 }
-
-.page-header {
-  margin-bottom: 20px;
-}
-
+ 
+.page-header { margin-bottom: 20px; }
+ 
 .page-title {
   font-family: 'Playfair Display', serif;
   font-size: 26px;
   color: var(--green-dark);
   margin-bottom: 4px;
 }
-
-.page-subtitle {
-  color: var(--text-secondary);
-  font-size: 14px;
-}
-
+ 
+.page-subtitle { color: var(--text-secondary); font-size: 14px; }
+ 
 /* ===== Search Bar ===== */
 .search-bar {
   position: relative;
   margin-bottom: 16px;
 }
-
+ 
 .search-bar input {
   width: 100%;
   padding: 10px 16px 10px 40px;
@@ -150,11 +159,12 @@ body {
   font-size: 14px;
   color: var(--text-primary);
   outline: none;
-  transition: border-color 0.2s;
+  /* Transition on border-color for focus effect */
+  transition: border-color var(--transition-fast);
 }
-
+ 
 .search-bar input:focus { border-color: var(--green-light); }
-
+ 
 .search-icon {
   position: absolute;
   left: 14px;
@@ -163,7 +173,7 @@ body {
   color: var(--text-light);
   font-size: 16px;
 }
-
+ 
 /* ===== Filter Tabs ===== */
 .tab-bar {
   display: flex;
@@ -174,7 +184,7 @@ body {
   padding: 4px;
   margin-bottom: 16px;
 }
-
+ 
 .tab-btn {
   flex: 1;
   padding: 8px;
@@ -186,19 +196,19 @@ body {
   font-weight: 500;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: all 0.2s;
+  transition: background var(--transition-fast), color var(--transition-fast);
 }
-
-.tab-btn.active {
-  background: var(--green-mid);
-  color: var(--white);
-}
-
+ 
+.tab-btn.active { background: var(--green-mid); color: var(--white); }
 .tab-btn:hover:not(.active) { background: var(--sand-dark); }
-
+ 
 /* ===== Destination Cards ===== */
-.destinations-list { display: flex; flex-direction: column; gap: 10px; }
-
+.destinations-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+ 
 .dest-card {
   background: var(--white);
   border: 1px solid var(--border);
@@ -208,16 +218,34 @@ body {
   align-items: center;
   gap: 14px;
   cursor: pointer;
-  transition: all 0.2s;
+  /* CSS Transition: smooth hover animation */
+  transition: border-color var(--transition-fast),
+              transform var(--transition-fast),
+              box-shadow var(--transition-fast);
   box-shadow: var(--shadow);
+ 
+  /* CSS Animation: cards slide in on page load */
+  animation: cardSlideIn 0.35s ease forwards;
 }
-
+ 
+/* Stagger card animations using nth-child */
+.dest-card:nth-child(1) { animation-delay: 0.05s; }
+.dest-card:nth-child(2) { animation-delay: 0.10s; }
+.dest-card:nth-child(3) { animation-delay: 0.15s; }
+.dest-card:nth-child(4) { animation-delay: 0.20s; }
+.dest-card:nth-child(5) { animation-delay: 0.25s; }
+ 
+@keyframes cardSlideIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
 .dest-card:hover {
   border-color: var(--green-light);
   transform: translateY(-2px);
   box-shadow: 0 6px 20px rgba(0,0,0,0.1);
 }
-
+ 
 .dest-icon {
   width: 46px;
   height: 46px;
@@ -228,10 +256,14 @@ body {
   justify-content: center;
   font-size: 22px;
   flex-shrink: 0;
+  /* Transition for icon hover scale */
+  transition: transform var(--transition-fast);
 }
-
+ 
+.dest-card:hover .dest-icon { transform: scale(1.08); }
+ 
 .dest-info { flex: 1; min-width: 0; }
-
+ 
 .dest-name {
   font-weight: 500;
   font-size: 15px;
@@ -240,22 +272,18 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
 }
-
-.dest-country {
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-top: 2px;
-}
-
+ 
+.dest-country { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
+ 
 .dest-actions {
   display: flex;
   align-items: center;
   gap: 8px;
   flex-shrink: 0;
 }
-
+ 
 .arrow { color: var(--text-light); font-size: 20px; }
-
+ 
 /* ===== Badges ===== */
 .badge {
   font-size: 11px;
@@ -264,11 +292,11 @@ body {
   border-radius: 99px;
   white-space: nowrap;
 }
-
+ 
 .badge-planned { background: var(--green-pale); color: var(--green-mid); }
 .badge-visited { background: #fff3e0; color: #e65100; }
-
-/* ===== Delete button on cards ===== */
+ 
+/* ===== Delete Button ===== */
 .delete-btn {
   background: none;
   border: none;
@@ -277,11 +305,11 @@ body {
   font-size: 13px;
   padding: 4px 6px;
   border-radius: 6px;
-  transition: all 0.2s;
+  transition: background var(--transition-fast), color var(--transition-fast);
   line-height: 1;
 }
 .delete-btn:hover { background: #fee2e2; color: #dc2626; }
-
+ 
 /* ===== Empty State ===== */
 .empty-state {
   display: flex;
@@ -291,12 +319,24 @@ body {
   padding: 60px 20px;
   text-align: center;
   gap: 12px;
+  /* Animation: fade in empty state */
+  animation: pageFadeIn 0.4s ease forwards;
 }
-
-.empty-state .empty-emoji { font-size: 48px; }
+ 
+.empty-state .empty-emoji {
+  font-size: 48px;
+  /* Animation: gentle bounce on empty state icon */
+  animation: bounce 2s infinite;
+}
+ 
+@keyframes bounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+ 
 .empty-state h3 { font-family: 'Playfair Display', serif; color: var(--green-dark); }
-.empty-state p { color: var(--text-secondary); font-size: 14px; max-width: 260px; }
-
+.empty-state p  { color: var(--text-secondary); font-size: 14px; max-width: 260px; }
+ 
 /* ===== Forms ===== */
 .form-card {
   background: var(--white);
@@ -304,10 +344,12 @@ body {
   border-radius: var(--radius);
   padding: 24px;
   box-shadow: var(--shadow);
+  /* Animation: form slides in */
+  animation: pageFadeIn 0.4s ease forwards;
 }
-
+ 
 .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 18px; }
-
+ 
 .form-label {
   font-size: 13px;
   font-weight: 500;
@@ -315,7 +357,7 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.05em;
 }
-
+ 
 .form-input {
   border: 1px solid var(--border);
   border-radius: var(--radius-sm);
@@ -325,29 +367,33 @@ body {
   color: var(--text-primary);
   background: var(--white);
   outline: none;
-  transition: border-color 0.2s;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
   width: 100%;
 }
-
-.form-input:focus { border-color: var(--green-mid); }
-
+ 
+.form-input:focus {
+  border-color: var(--green-mid);
+  box-shadow: 0 0 0 3px rgba(45,106,79,0.1);
+}
+ 
 textarea.form-input { resize: vertical; min-height: 100px; }
-
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
-
 .form-actions { display: flex; gap: 10px; margin-top: 8px; }
 .form-actions .btn { flex: 1; justify-content: center; }
-
+ 
 .form-message {
   display: none;
   padding: 10px 14px;
   border-radius: var(--radius-sm);
   font-size: 14px;
   margin-bottom: 16px;
+  /* Animation: message slides in */
+  animation: pageFadeIn 0.3s ease forwards;
 }
+ 
 .form-message.success { background: var(--green-pale); color: var(--green-mid); }
-.form-message.error { background: #fee2e2; color: #dc2626; }
-
+.form-message.error   { background: #fee2e2; color: #dc2626; }
+ 
 /* ===== Details Page ===== */
 .detail-hero {
   background: var(--green-dark);
@@ -357,8 +403,15 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   display: flex;
   align-items: center;
   gap: 16px;
+  /* Animation: hero slides in from top */
+  animation: heroSlideDown 0.4s ease forwards;
 }
-
+ 
+@keyframes heroSlideDown {
+  from { opacity: 0; transform: translateY(-12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+ 
 .detail-hero-emoji {
   font-size: 48px;
   background: rgba(255,255,255,0.1);
@@ -370,23 +423,29 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   justify-content: center;
   flex-shrink: 0;
 }
-
+ 
 .detail-hero-info { flex: 1; }
+ 
 .detail-city {
   font-family: 'Playfair Display', serif;
   font-size: 28px;
   color: var(--white);
 }
+ 
 .detail-country { color: #a8d5b5; font-size: 15px; }
-
+ 
 .detail-section {
   background: var(--white);
   border: 1px solid var(--border);
   border-radius: var(--radius);
   padding: 18px;
   margin-bottom: 12px;
+  /* Transition for hover */
+  transition: box-shadow var(--transition-fast);
 }
-
+ 
+.detail-section:hover { box-shadow: 0 4px 16px rgba(0,0,0,0.08); }
+ 
 .detail-section-label {
   font-size: 11px;
   text-transform: uppercase;
@@ -395,12 +454,9 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   font-weight: 500;
   margin-bottom: 6px;
 }
-
-.detail-section-value {
-  font-size: 15px;
-  color: var(--text-primary);
-}
-
+ 
+.detail-section-value { font-size: 15px; color: var(--text-primary); }
+ 
 /* ===== Weather Box ===== */
 .weather-box {
   background: var(--white);
@@ -409,17 +465,27 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   padding: 18px;
   margin-bottom: 12px;
 }
-
+ 
 .weather-content, .weather-placeholder {
   display: flex;
   align-items: center;
   gap: 16px;
 }
-
-.weather-emoji { font-size: 36px; }
+ 
+.weather-emoji {
+  font-size: 36px;
+  /* Animation: weather icon pulses gently */
+  animation: weatherPulse 3s ease-in-out infinite;
+}
+ 
+@keyframes weatherPulse {
+  0%, 100% { transform: scale(1); }
+  50%       { transform: scale(1.1); }
+}
+ 
 .weather-temp { font-size: 26px; font-weight: 500; color: var(--green-dark); }
 .weather-desc { font-size: 13px; color: var(--text-secondary); margin-top: 2px; }
-
+ 
 .weather-details {
   display: flex;
   gap: 14px;
@@ -429,21 +495,17 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   font-size: 13px;
   color: var(--text-secondary);
 }
-
+ 
 .weather-loading, .weather-error {
   font-size: 14px;
   color: var(--text-secondary);
   padding: 8px 0;
 }
-
+ 
 /* ===== Detail Actions ===== */
-.detail-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 8px;
-}
+.detail-actions { display: flex; gap: 10px; margin-top: 8px; }
 .detail-actions .btn { flex: 1; justify-content: center; }
-
+ 
 /* ===== Visited Page ===== */
 .visited-header {
   display: flex;
@@ -451,7 +513,7 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   justify-content: space-between;
   margin-bottom: 20px;
 }
-
+ 
 .visited-count {
   font-size: 13px;
   color: var(--text-secondary);
@@ -460,8 +522,8 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   border-radius: 99px;
   padding: 4px 14px;
 }
-
-/* ===== Back button ===== */
+ 
+/* ===== Back Link ===== */
 .back-link {
   display: inline-flex;
   align-items: center;
@@ -470,13 +532,18 @@ textarea.form-input { resize: vertical; min-height: 100px; }
   font-size: 14px;
   text-decoration: none;
   margin-bottom: 16px;
-  transition: color 0.2s;
+  transition: color var(--transition-fast), gap var(--transition-fast);
 }
-.back-link:hover { color: var(--green-mid); }
-
-/* ===== Responsive ===== */
+ 
+.back-link:hover {
+  color: var(--green-mid);
+  gap: 10px; /* subtle arrow movement on hover */
+}
+ 
+/* ===== Responsive Design ===== */
 @media (max-width: 480px) {
   .form-row { grid-template-columns: 1fr; }
   .detail-hero { flex-direction: column; text-align: center; }
   .page-title { font-size: 22px; }
+  .weather-details { flex-direction: column; gap: 6px; }
 }
