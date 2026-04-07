@@ -8,7 +8,6 @@
 </head>
 <body>
  
-  <!-- Navigation -->
   <nav class="navbar">
     <a href="index.html" class="navbar-brand">
       <span>✈️</span> Travel Planner
@@ -19,7 +18,6 @@
     </div>
   </nav>
  
-  <!-- Main Content -->
   <div class="page-container">
  
     <a href="index.html" class="back-link">← Back to destinations</a>
@@ -31,40 +29,38 @@
  
     <div class="form-card">
  
-      <!-- Form feedback message (shown by destinationModule.js) -->
       <div id="form-message" class="form-message"></div>
  
-      <!-- novalidate disables browser default validation so we handle it in JS -->
       <form id="add-form" novalidate>
  
-        <!-- City & Country in a 2-column grid -->
-        <div class="form-row">
-          <div class="form-group">
-            <label class="form-label" for="city">City *</label>
-            <input class="form-input" type="text" id="city" name="city"
-                   placeholder="e.g. Tokyo" required />
-          </div>
-          <div class="form-group">
-            <label class="form-label" for="country">Country *</label>
-            <input class="form-input" type="text" id="country" name="country"
-                   placeholder="e.g. Japan" required />
-          </div>
+        <!-- City -->
+        <div class="form-group">
+          <label class="form-label" for="city">City *</label>
+          <input class="form-input" type="text" id="city" name="city"
+                 placeholder="e.g. Tokyo" required />
         </div>
  
-        <!-- Planned Visit Date -->
+        <!-- Country Dropdown -->
+        <div class="form-group">
+          <label class="form-label" for="country">Country *</label>
+          <select class="form-input country-select" id="country" name="country" required>
+            <option value="">— Select a country —</option>
+          </select>
+        </div>
+ 
+        <!-- Planned Date -->
         <div class="form-group">
           <label class="form-label" for="plannedDate">Planned Visit Date</label>
           <input class="form-input" type="month" id="plannedDate" name="plannedDate" />
         </div>
  
-        <!-- Travel Notes -->
+        <!-- Notes -->
         <div class="form-group">
           <label class="form-label" for="notes">Travel Notes</label>
           <textarea class="form-input" id="notes" name="notes"
                     placeholder="Things to do, places to eat, must-sees..."></textarea>
         </div>
  
-        <!-- Form Actions -->
         <div class="form-actions">
           <button type="submit" class="btn btn-primary">Save Destination</button>
           <button type="button" class="btn btn-secondary" id="cancel-btn">Cancel</button>
@@ -75,8 +71,9 @@
  
   </div>
  
-  <!-- Scripts -->
+  <!-- storageModule must load first, then displayModule, then destinationModule -->
   <script src="js/storageModule.js"></script>
+  <script src="js/displayModule.js"></script>
   <script src="js/destinationModule.js"></script>
   <script>
     DestinationModule.init();

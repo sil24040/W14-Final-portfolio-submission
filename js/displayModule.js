@@ -3,7 +3,6 @@ const DisplayModule = {
   currentFilter: 'all',
   currentCountry: 'all',
  
-  // Full list of all countries in the world
   ALL_COUNTRIES: [
     'Afghanistan','Albania','Algeria','Andorra','Angola','Antigua and Barbuda',
     'Argentina','Armenia','Australia','Austria','Azerbaijan','Bahamas','Bahrain',
@@ -36,9 +35,7 @@ const DisplayModule = {
     'Ukraine','United Arab Emirates','United Kingdom','USA','Uruguay',
     'Uzbekistan','Vanuatu','Vatican City','Venezuela','Vietnam','Yemen',
     'Zambia','Zimbabwe',
-    // US States and territories (common travel destinations)
-    'Hawaii','Alaska','California','Florida','New York','Texas','Colorado',
-    // UK regions
+    'Hawaii','Alaska','California','Florida','New York State','Texas','Colorado',
     'England','Scotland','Wales','Northern Ireland'
   ].sort(),
  
@@ -47,21 +44,39 @@ const DisplayModule = {
     this.bindFilterTabs();
     this.buildCountryDropdown();
  
-    document.getElementById('search-input')?.addEventListener('input', () => this.render());
+    // Search input — fires on every keystroke and re-renders
+    const searchInput = document.getElementById('search-input');
+    if (searchInput) {
+      searchInput.addEventListener('input', () => {
+        this.render();
+      });
+    }
  
-    document.getElementById('country-filter')?.addEventListener('change', (e) => {
-      this.currentCountry = e.target.value;
-      this.render();
-    });
+    // Country dropdown — fires when selection changes
+    const countryFilter = document.getElementById('country-filter');
+    if (countryFilter) {
+      countryFilter.addEventListener('change', (e) => {
+        this.currentCountry = e.target.value;
+        // Save selected country to sessionStorage so Add page can read it
+        sessionStorage.setItem('selectedCountry', this.currentCountry);
+        this.render();
+      });
+    }
+ 
+    // Update Add button link to pass selected country
+    const addBtn = document.querySelector('a[href="add.html"]');
+    if (addBtn) {
+      addBtn.addEventListener('click', (e) => {
+        // Save current country selection before navigating
+        sessionStorage.setItem('selectedCountry', this.currentCountry);
+      });
+    }
   },
  
-  // --- buildCountryDropdown: populates dropdown with all world countries ---
-  // Uses the ALL_COUNTRIES array — a static list of every country
   buildCountryDropdown() {
     const select = document.getElementById('country-filter');
     if (!select) return;
  
-    // .map() transforms each country name into an <option> HTML string
     const options = this.ALL_COUNTRIES.map(c =>
       `<option value="${c}">${c}</option>`
     ).join('');
@@ -72,20 +87,26 @@ const DisplayModule = {
  
   async render() {
     const destinations = await StorageModule.loadDestinations();
-    const search = document.getElementById('search-input')?.value.toLowerCase() || '';
+ 
+    // Read search value directly each time render is called
+    const searchInput = document.getElementById('search-input');
+    const search = searchInput ? searchInput.value.toLowerCase() : '';
  
     let filtered = destinations;
  
+    // Filter by tab (all/planned/visited)
     if (this.currentFilter === 'planned') {
       filtered = destinations.filter(d => !d.visited);
     } else if (this.currentFilter === 'visited') {
       filtered = destinations.filter(d => d.visited);
     }
  
+    // Filter by country dropdown
     if (this.currentCountry !== 'all') {
       filtered = filtered.filter(d => d.country === this.currentCountry);
     }
  
+    // Filter by search text
     if (search) {
       filtered = filtered.filter(d =>
         d.city.toLowerCase().includes(search) ||
@@ -184,5 +205,5 @@ const DisplayModule = {
     };
     return map[country] || '✈️';
   }
- 
 };
+ 
