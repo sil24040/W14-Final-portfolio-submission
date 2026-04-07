@@ -1,0 +1,120 @@
+# ✈️ Travel Planner
+
+A web application that helps users organize and track places they want to visit. Users can add destinations, store travel notes, view live weather, and mark places as visited.
+
+Built as a final project for WDD 330 — Web Frontend Development II.
+
+---
+
+## 🌍 Features
+
+- **Add destinations** — save any city with a planned date and personal travel notes
+- **View destination details** — see all info about a saved destination in one place
+- **Mark as visited** — toggle destinations between "Planned" and "Visited"
+- **Live weather** — current weather conditions via the OpenWeatherMap API
+- **Search & filter** — search by city or country, filter by All / Planned / Visited
+- **Persistent storage** — all data saved to localStorage so nothing is lost on refresh
+- **Starter data** — pre-loaded with 5 example destinations from a local JSON file
+
+---
+
+## 📁 Project Structure
+
+```
+travel-planner/
+├── index.html          # Home page — destination list
+├── add.html            # Add destination form
+├── details.html        # Destination detail view
+├── visited.html        # Visited destinations page
+├── css/
+│   └── styles.css      # All styles including animations
+├── js/
+│   ├── storageModule.js     # localStorage read/write operations
+│   ├── displayModule.js     # Renders destination list and filters
+│   ├── destinationModule.js # Handles the add destination form
+│   ├── detailsModule.js     # Handles the details page
+│   ├── visitedModule.js     # Handles the visited page
+│   └── weatherModule.js     # Fetches live weather from OpenWeatherMap
+└── data/
+    └── destinations.json    # Starter destination data
+```
+
+---
+
+## 💡 JavaScript Concepts Demonstrated
+
+| Concept | Where Used |
+|---|---|
+| `localStorage` read/write/parse | `storageModule.js` |
+| `async/await` | All modules |
+| `try/catch` error handling | `storageModule.js`, `weatherModule.js` |
+| Fetch API (external + cross-origin) | `weatherModule.js` |
+| DOM manipulation | All modules |
+| Higher-order functions `.map()` `.filter()` `.forEach()` | `displayModule.js`, `visitedModule.js` |
+| Callbacks in event listeners | All modules |
+| `this` keyword | All modules |
+| Spread syntax `...` | `storageModule.js`, `destinationModule.js` |
+| Closure / variable scope | `currentFilter` in `displayModule.js` |
+| `setTimeout` | `destinationModule.js` |
+| Form validation (client-side) | `destinationModule.js` |
+| Template literals | `displayModule.js`, `visitedModule.js` |
+| CSS Animations & Transitions | `styles.css` |
+| URLSearchParams (Web API) | `detailsModule.js` |
+| ES6 Modules / separation of concerns | All 6 JS files |
+
+---
+
+## 🔧 Data Sources
+
+- **External API** — [OpenWeatherMap](https://openweathermap.org/api) for live weather data
+- **localStorage** — stores all user-created destinations in the browser
+- **Local JSON file** — `data/destinations.json` provides starter destination data on first load
+
+---
+
+## 🚀 How to Run
+
+1. Clone the repository:
+```bash
+git clone https://github.com/sil24040/W14-Final-portfolio-submission.git
+```
+
+2. Open the project in VS Code
+
+3. Right-click `travel-planner/index.html` and select **"Open with Live Server"**
+
+> No npm install or build step needed — this is a plain HTML/CSS/JS project.
+
+---
+
+## 🌤️ Weather API Setup
+
+To enable live weather:
+
+1. Sign up for a free API key at [openweathermap.org](https://openweathermap.org/api)
+2. Open `js/weatherModule.js`
+3. Replace `'YOUR_API_KEY_HERE'` with your key:
+
+```javascript
+API_KEY: 'your_actual_key_here',
+```
+
+> Note: New API keys take 10-15 minutes to activate after sign up.
+
+---
+
+## 📅 Development Schedule
+
+| Week | Milestone |
+|---|---|
+| Week 10 | Project planning, HTML structure, folder setup |
+| Week 11 | JavaScript modules — add, display, details, visited |
+| Week 12 | localStorage integration, starter JSON data |
+| Week 13 | CSS styling, animations, responsive design |
+| Week 14 | Weather API, testing, debugging, final submission |
+
+---
+
+## 👩‍💻 Author
+
+Sophie Ivan — BYU-Idaho WDD 330
