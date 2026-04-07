@@ -1,33 +1,56 @@
 const DisplayModule = {
  
-  // --- Closure example ---
-  // currentFilter is enclosed in this module object and remembered
-  // between calls — this is a practical use of closure/scope
   currentFilter: 'all',
+  currentCountry: 'all', // closure variable for country dropdown
  
-  // --- init: sets up the page ---
-  // async because render() needs to await data from storage
   async init() {
     await this.render();
     this.bindFilterTabs();
+    await this.buildCountryDropdown();
  
-    // Callback: the arrow function is a callback passed to addEventListener
+    // Callback on search input
     document.getElementById('search-input')?.addEventListener('input', () => this.render());
+ 
+    // Callback on country dropdown change
+    document.getElementById('country-filter')?.addEventListener('change', (e) => {
+      this.currentCountry = e.target.value;
+      this.render();
+    });
   },
  
-  // --- render: builds the destination list ---
+  // --- buildCountryDropdown: dynamically builds the country filter ---
+  // ES6 Set automatically removes duplicates — each country appears only once
+  async buildCountryDropdown() {
+    const destinations = await StorageModule.loadDestinations();
+    const select = document.getElementById('country-filter');
+    if (!select) return;
+ 
+    // Spread syntax converts Set back to array, .sort() alphabetizes
+    const countries = [...new Set(destinations.map(d => d.country))].sort();
+ 
+    // .map() builds <option> elements, DOM manipulation inserts them
+    const options = countries.map(c => `<option value="${c}">${c}</option>`).join('');
+    select.innerHTML = `<option value="all">All Countries</option>${options}`;
+ 
+    // Restore previously selected country after rebuild
+    select.value = this.currentCountry;
+  },
+ 
   async render() {
-    // await pauses until loadDestinations resolves
     const destinations = await StorageModule.loadDestinations();
     const search = document.getElementById('search-input')?.value.toLowerCase() || '';
  
-    // Higher-order function: .filter() with a callback to narrow results
+    // Higher-order function: .filter() for visited/planned tab
     let filtered = destinations;
- 
     if (this.currentFilter === 'planned') {
       filtered = destinations.filter(d => !d.visited);
     } else if (this.currentFilter === 'visited') {
       filtered = destinations.filter(d => d.visited);
+    }
+ 
+    // Higher-order function: chained .filter() for country dropdown
+    if (this.currentCountry !== 'all') {
+      filtered = filtered.filter(d => d.country === this.currentCountry);
     }
  
     // Higher-order function: chained .filter() for search
@@ -38,7 +61,9 @@ const DisplayModule = {
       );
     }
  
-    // DOM manipulation: get references to elements
+    // Rebuild dropdown to reflect any new destinations added
+    await this.buildCountryDropdown();
+ 
     const container = document.getElementById('destinations-list');
     const emptyState = document.getElementById('empty-state');
  
@@ -46,40 +71,33 @@ const DisplayModule = {
  
     if (filtered.length === 0) {
       container.innerHTML = '';
-      // DOM manipulation: change display style directly
       if (emptyState) emptyState.style.display = 'flex';
       return;
     }
  
     if (emptyState) emptyState.style.display = 'none';
  
-    // Higher-order function: .map() transforms each destination into an HTML string
-    // Template literals build dynamic HTML from data
+    // Higher-order function: .map() transforms destinations into HTML cards
     container.innerHTML = filtered.map(dest => this.renderCard(dest)).join('');
  
-    // Higher-order function: .forEach() with a callback to bind delete buttons
+    // Higher-order function: .forEach() binds delete button callbacks
     container.querySelectorAll('.delete-btn').forEach(btn => {
       btn.addEventListener('click', (e) => {
-        // Callback: handles the click event
         e.stopPropagation();
         const id = btn.dataset.id;
         if (confirm('Remove this destination?')) {
           StorageModule.deleteDestination(id);
-          this.render(); // re-render after deletion
+          this.render();
         }
       });
     });
   },
  
-  // --- renderCard: returns HTML string for one destination ---
-  // Template literals allow embedded expressions inside HTML strings
   renderCard(dest) {
     const emoji = this.getEmoji(dest.country);
     const badge = dest.visited
       ? '<span class="badge badge-visited">Visited</span>'
       : '<span class="badge badge-planned">Planned</span>';
- 
-    // Ternary operator for conditional date display
     const date = dest.plannedDate
       ? `<span class="dest-date">${this.formatDate(dest.plannedDate)}</span>`
       : '';
@@ -99,24 +117,17 @@ const DisplayModule = {
     `;
   },
  
-  // --- bindFilterTabs: attaches click events to the tab buttons ---
-  // Demonstrates callbacks and DOM manipulation together
   bindFilterTabs() {
     document.querySelectorAll('.tab-btn').forEach(btn => {
-      // Callback function passed to addEventListener
       btn.addEventListener('click', () => {
-        // DOM manipulation: remove active class from all, add to clicked
         document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
- 
-        // Update the closure variable — this persists between renders
         this.currentFilter = btn.dataset.filter;
         this.render();
       });
     });
   },
  
-  // --- formatDate: converts '2025-06' to '· Jun 2025' ---
   formatDate(dateStr) {
     if (!dateStr) return '';
     const [year, month] = dateStr.split('-');
@@ -124,8 +135,6 @@ const DisplayModule = {
     return `· ${months[parseInt(month) - 1]} ${year}`;
   },
  
-  // --- getEmoji: maps country name to a relevant emoji ---
-  // Rest/spread concept: object literal used as a lookup map
   getEmoji(country) {
     const map = {
       'France': '🗼', 'Japan': '🌸', 'Italy': '🏛️', 'USA': '🗽',
@@ -133,9 +142,9 @@ const DisplayModule = {
       'Spain': '💃', 'Greece': '🏺', 'Thailand': '🐘',
       'Mexico': '🌮', 'India': '🕌', 'Egypt': '🐫', 'Peru': '🦙',
       'Portugal': '🐟', 'Morocco': '🕌', 'Iceland': '🌋',
-      'New Zealand': '🥝', 'Canada': '🍁', 'UK': '☂️'
+      'New Zealand': '🥝', 'Canada': '🍁', 'UK': '☂️',
+      'Hawaii': '🌺', 'England': '🏰'
     };
-    // Return matching emoji or default travel emoji
     return map[country] || '✈️';
   }
  

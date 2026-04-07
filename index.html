@@ -8,7 +8,6 @@
 </head>
 <body>
  
-  <!-- Navigation -->
   <nav class="navbar">
     <a href="index.html" class="navbar-brand">
       <span>✈️</span> Travel Planner
@@ -20,7 +19,6 @@
     </div>
   </nav>
  
-  <!-- Main Content -->
   <div class="page-container">
  
     <div class="page-header">
@@ -34,6 +32,13 @@
       <input type="text" id="search-input" placeholder="Search by city or country..." />
     </div>
  
+    <!-- Country Filter Dropdown -->
+    <div class="filter-row">
+      <select id="country-filter" class="country-select">
+        <option value="all">All Countries</option>
+      </select>
+    </div>
+ 
     <!-- Filter Tabs -->
     <div class="tab-bar">
       <button class="tab-btn active" data-filter="all">All</button>
@@ -41,10 +46,8 @@
       <button class="tab-btn" data-filter="visited">Visited</button>
     </div>
  
-    <!-- Destinations List — populated by displayModule.js -->
     <div class="destinations-list" id="destinations-list"></div>
  
-    <!-- Empty State — shown when no destinations match -->
     <div class="empty-state" id="empty-state" style="display: none;">
       <div class="empty-emoji">🗺️</div>
       <h3>No destinations yet</h3>
@@ -54,11 +57,9 @@
  
   </div>
  
-  <!-- Scripts loaded in dependency order -->
   <script src="js/storageModule.js"></script>
   <script src="js/displayModule.js"></script>
   <script>
-    // Initialize the display module when the page loads
     DisplayModule.init();
   </script>
  
